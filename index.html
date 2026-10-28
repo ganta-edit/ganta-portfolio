@@ -1367,6 +1367,55 @@
   .pill.static { cursor: default; }
   .pill.static:hover { border-color: var(--line); color: var(--ink); transform: none; }
   .pill.static:hover .app-ico { transform: none; }
+
+  /* PHOTO : cadre en verre dépoli (glassmorphism) */
+  .portrait::before {
+    content: "";
+    position: absolute;
+    inset: -8% -6%;
+    z-index: 0;
+    border-radius: 40px;
+    background: radial-gradient(60% 50% at 50% 40%, rgba(255, 69, 16, .55), rgba(255, 69, 16, 0) 70%);
+    filter: blur(30px);
+    animation: glassGlow 6s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes glassGlow {
+    from { transform: translate(0, 0) scale(1); opacity: .8; }
+    to   { transform: translate(14px, -12px) scale(1.08); opacity: 1; }
+  }
+  .portrait-frame {
+    background: rgba(255, 255, 255, .12) !important;
+    border: 1px solid rgba(255, 255, 255, .35);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(255, 255, 255, .4);
+    padding: 14px;
+  }
+  .portrait-frame img,
+  .portrait-frame .portrait-fallback {
+    inset: 14px;
+    width: calc(100% - 28px);
+    height: calc(100% - 28px);
+    border-radius: 16px;
+  }
+
+  /* Vidéos réalisations : plus de bouton play, bouton son toujours visible */
+  .work-play { display: none !important; }
+  .sound-btn { opacity: 1 !important; pointer-events: auto !important; }
+
+  /* Prix en franc CFA (version française uniquement) */
+  .price .fcfa { display: block; margin-top: 6px; font-size: 52px; font-weight: 800; line-height: 1; letter-spacing: -0.05em; color: var(--ink); }
+  .price .fcfa[hidden] { display: none; }
+.price .eur[hidden] { display: none; }
+
+  /* Devise (€ ou FCFA) : orange et en petit */
+  .price .cur { color: var(--orange); font-size: .38em; font-weight: 700; letter-spacing: .02em; margin-left: .15em; vertical-align: .55em; }
+html, body { overflow-x: clip; }
+
+  /* Formulaire : pack choisi et message d'état */
+  .pack-chip { justify-self: start; padding: 8px 14px; border-radius: 999px; background: var(--orange); color: #fff; font-size: 13px; font-weight: 600; }
+  .pack-chip[hidden] { display: none; }
+  .form-status { font-size: 15px; color: var(--ink); }
+  .contact-form button[disabled] { opacity: .6; cursor: wait; }
 </style>
 </head>
 <body>
@@ -1514,7 +1563,7 @@
     <div class="work-grid">
     <article class="work-card reveal">
       <div class="work-thumb t1">
-        <video src="video1.mp4" muted autoplay loop playsinline preload="auto"></video>
+        <video src="video1.mp4" muted autoplay loop playsinline preload="metadata"></video>
         <span class="work-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></span>
         <button class="sound-btn" type="button" data-i18n-aria="soundLabel" aria-label="Turn sound on or off">
           <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-volume-off"/></svg>
@@ -1524,7 +1573,7 @@
     </article>
     <article class="work-card reveal">
       <div class="work-thumb t2">
-        <video src="video2.mp4" muted autoplay loop playsinline preload="auto"></video>
+        <video src="video2.mp4" muted autoplay loop playsinline preload="metadata"></video>
         <span class="work-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></span>
         <button class="sound-btn" type="button" data-i18n-aria="soundLabel" aria-label="Turn sound on or off">
           <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-volume-off"/></svg>
@@ -1534,7 +1583,7 @@
     </article>
     <article class="work-card reveal">
       <div class="work-thumb t3">
-        <video src="video3.mp4" muted autoplay loop playsinline preload="auto"></video>
+        <video src="video3.mp4" muted autoplay loop playsinline preload="metadata"></video>
         <span class="work-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></span>
         <button class="sound-btn" type="button" data-i18n-aria="soundLabel" aria-label="Turn sound on or off">
           <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-volume-off"/></svg>
@@ -1544,7 +1593,7 @@
     </article>
     <article class="work-card reveal">
       <div class="work-thumb t4">
-        <video src="video4.mp4" muted autoplay loop playsinline preload="auto"></video>
+        <video src="video4.mp4" muted autoplay loop playsinline preload="metadata"></video>
         <span class="work-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></span>
         <button class="sound-btn" type="button" data-i18n-aria="soundLabel" aria-label="Turn sound on or off">
           <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-volume-off"/></svg>
@@ -1554,7 +1603,7 @@
     </article>
     <article class="work-card reveal">
       <div class="work-thumb t5">
-        <video src="video5.mp4" muted autoplay loop playsinline preload="auto"></video>
+        <video src="video5.mp4" muted autoplay loop playsinline preload="metadata"></video>
         <span class="work-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></span>
         <button class="sound-btn" type="button" data-i18n-aria="soundLabel" aria-label="Turn sound on or off">
           <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-volume-off"/></svg>
@@ -1564,7 +1613,7 @@
     </article>
     <article class="work-card wide reveal">
       <div class="work-thumb t6">
-        <video src="video6.mp4" muted autoplay loop playsinline preload="auto"></video>
+        <video src="video6.mp4" muted autoplay loop playsinline preload="metadata"></video>
         <span class="work-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></span>
         <button class="sound-btn" type="button" data-i18n-aria="soundLabel" aria-label="Turn sound on or off">
           <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-volume-off"/></svg>
@@ -1611,7 +1660,7 @@
     <div class="price-grid">
     <article class="price-card reveal">
       <h3 data-i18n="planStarter">Plan</h3>
-      <div class="price">17€</div>
+      <div class="price"><span class="eur">17<span class="cur">€</span></span><span class="fcfa" hidden>11 150<span class="cur">FCFA</span></span></div>
       <ul>
         <li data-i18n="feat1a">Feature</li>
         <li data-i18n="feat1b">Feature</li>
@@ -1621,7 +1670,7 @@
     </article>
     <article class="price-card reveal">
       <h3 data-i18n="planStandard">Plan</h3>
-      <div class="price">47€</div>
+      <div class="price"><span class="eur">47<span class="cur">€</span></span><span class="fcfa" hidden>30 850<span class="cur">FCFA</span></span></div>
       <ul>
         <li data-i18n="feat2a">Feature</li>
         <li data-i18n="feat2b">Feature</li>
@@ -1632,7 +1681,7 @@
     <article class="price-card reveal featured">
       <span class="badge" data-i18n="popular">Most popular</span>
       <h3 data-i18n="planPremium">Plan</h3>
-      <div class="price">95€</div>
+      <div class="price"><span class="eur">95<span class="cur">€</span></span><span class="fcfa" hidden>62 300<span class="cur">FCFA</span></span></div>
       <ul>
         <li data-i18n="feat3a">Feature</li>
         <li data-i18n="feat3b">Feature</li>
@@ -1715,6 +1764,8 @@
       </div>
 
       <form class="contact-form reveal" id="contactForm">
+        <p class="pack-chip" id="packChip" hidden></p>
+        <input type="hidden" id="fieldPack" name="pack">
         <input type="text" id="fieldName" name="name" required autocomplete="name"
                data-i18n-placeholder="fieldName" placeholder="Your name">
         <select id="fieldProject" name="project">
@@ -1817,6 +1868,10 @@
       optYoutube: "YouTube video",
       optOther: "Other",
       send: "Send on WhatsApp",
+      packChosen: "Chosen pack",
+      waPack: "Pack",
+      formSent: "Thanks! Your message has been sent. I will get back to you soon.",
+      formError: "Sorry, sending failed. Please write to me on WhatsApp.",
       waHello: "Hello ganta.edit, I'm",
       waProject: "Project type",
       waDetails: "Details",
@@ -1897,6 +1952,10 @@
       optYoutube: "Vidéo YouTube",
       optOther: "Autre",
       send: "Envoyer sur WhatsApp",
+      packChosen: "Pack choisi",
+      waPack: "Pack",
+      formSent: "Merci ! Votre message est envoyé, je vous réponds rapidement.",
+      formError: "Désolé, l’envoi a échoué. Écrivez-moi sur WhatsApp.",
       waHello: "Bonjour ganta.edit, je suis",
       waProject: "Type de projet",
       waDetails: "Détails",
@@ -1949,6 +2008,8 @@
       const value = dictionary[element.dataset.i18nAlt];
       if (value !== undefined) element.alt = value;
     });
+    document.querySelectorAll(".price .fcfa").forEach(el => { el.hidden = language !== "fr"; });
+    document.querySelectorAll(".price .eur").forEach(el => { el.hidden = language === "fr"; });
     languageToggle.textContent = language === "en" ? "FR" : "EN";
     languageToggle.setAttribute("aria-label", dictionary.switchLanguage);
     languageToggle.title = dictionary.switchLanguage;
@@ -1958,7 +2019,7 @@
         ? dictionary.closeMenu
         : dictionary.openMenu
     );
-    playButton.setAttribute("aria-label", dictionary.videoPreview);
+    if (playButton) playButton.setAttribute("aria-label", dictionary.videoPreview);
     document.querySelector(".down").setAttribute("aria-label", dictionary.scroll);
     document.querySelector(".down").title = dictionary.scroll;
     try {
@@ -2067,17 +2128,62 @@
     else if (key === "email") link.href = "mailto:" + CONTACT.email;
     else link.href = CONTACT[key];
   });
-  /* Le formulaire ouvre WhatsApp avec le message déjà écrit */
-  document.getElementById("contactForm").addEventListener("submit", event => {
+  /* FORMULAIRE : envoi vers ton adresse via FORM_ENDPOINT (Formspree), sinon WhatsApp */
+  const FORM_ENDPOINT = ""; // colle ici ton lien Formspree, ex. "https://formspree.io/f/xxxxxxx"
+  const form = document.getElementById("contactForm");
+  const packChip = document.getElementById("packChip");
+  const fieldPack = document.getElementById("fieldPack");
+  document.querySelectorAll(".price-card .btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const name = btn.closest(".price-card").querySelector("h3").textContent.trim();
+      fieldPack.value = name;
+      packChip.textContent = translations[currentLanguage].packChosen + " : " + name;
+      packChip.hidden = false;
+    });
+  });
+  function setFormStatus(message) {
+    let status = document.getElementById("formStatus");
+    if (!status) {
+      status = document.createElement("p");
+      status.id = "formStatus";
+      status.className = "form-status";
+      form.appendChild(status);
+    }
+    status.textContent = message;
+  }
+  form.addEventListener("submit", async event => {
     event.preventDefault();
     const dictionary = translations[currentLanguage];
     const name = document.getElementById("fieldName").value.trim();
     const select = document.getElementById("fieldProject");
     const project = select.options[select.selectedIndex].textContent;
     const details = document.getElementById("fieldMessage").value.trim();
-    const text = dictionary.waHello + " " + name + ".\n" +
-      dictionary.waProject + " : " + project + "\n" +
-      dictionary.waDetails + " : " + details;
+    const pack = fieldPack.value;
+    if (FORM_ENDPOINT) {
+      const button = form.querySelector("button[type=submit]");
+      button.disabled = true;
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form)
+        });
+        if (!res.ok) throw new Error("envoi refusé");
+        form.reset();
+        fieldPack.value = "";
+        packChip.hidden = true;
+        setFormStatus(dictionary.formSent);
+      } catch (error) {
+        setFormStatus(dictionary.formError);
+      } finally {
+        button.disabled = false;
+      }
+      return;
+    }
+    let text = dictionary.waHello + " " + name + ".\n" +
+      dictionary.waProject + " : " + project + "\n";
+    if (pack) text += dictionary.waPack + " : " + pack + "\n";
+    text += dictionary.waDetails + " : " + details;
     window.open("https://wa.me/" + CONTACT.whatsapp + "?text=" + encodeURIComponent(text), "_blank", "noopener");
   });
   document.getElementById("year").textContent = new Date().getFullYear();
@@ -2105,6 +2211,14 @@
     video.addEventListener("error", () => card.classList.remove("playing"));
   });
   workVideos.forEach(video => { const p = video.play(); if (p && p.catch) p.catch(() => {}); });
+
+  /* Si le navigateur bloque la lecture auto (iPhone), on lance au premier toucher */
+  const startWorkVideos = () => {
+    workVideos.forEach(v => { const p = v.play(); if (p && p.catch) p.catch(() => {}); });
+  };
+  ["touchstart", "click", "scroll"].forEach(evt =>
+    document.addEventListener(evt, startWorkVideos, { once: true, passive: true })
+  );
   document.querySelectorAll(".sound-btn").forEach(button => {
     button.addEventListener("click", () => {
       const card = button.closest(".work-card");
